@@ -28,6 +28,7 @@
   <arg name="robot_description_param_name" default="robot_description" doc="Name of the parameter which contains the robot description (ie: URDF) which should be spawned into Gazebo." />
   <arg name="spawn_z" default="0.1" doc="At which height the model should be spawned. NOTE: lower values will cause the robot to collide with the ground plane." />
   <arg name="start_gazebo" default="true" doc="If true, Gazebo will be started. If false, Gazebo will be assumed to have been started elsewhere." />
+  <arg name="spawn_args" default="" doc="Extra args to spawn_gazebo_model" />
 
   <!-- Load controller settings -->
   <rosparam file="$(arg controller_config_file)" command="load"/>
@@ -45,7 +46,8 @@
       -urdf
       -param $(arg robot_description_param_name)
       -model $(arg gazebo_model_name)
-      -z $(arg spawn_z)"
+      -z $(arg spawn_z)
+      $(arg spawn_args)"
     output="screen" respawn="false" />
 
   <!-- Load and start the controllers listed in the 'controllers' arg. -->
